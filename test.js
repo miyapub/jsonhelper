@@ -13,7 +13,9 @@ var array=JsonHelper.set(
             }
         ]
     }
-).select("name").join(
+).select("name",function(v){
+    return "hello "+v;
+}).join(
     {
         a:[
             1,2,3

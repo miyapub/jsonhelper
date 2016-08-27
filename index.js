@@ -13,11 +13,22 @@ function __isString(obj) {
 function __isNumber(obj) {
     return Object.prototype.toString.call(obj) === '[object Number]';
 }
+function __isFunction(obj) {
+    return Object.prototype.toString.call(obj) === '[object Function]';
+}
 
-function __selectArr(json,keyName,type) {
+function __selectArr(json,keyName,type,cb) {
+    var json=json;
+    var keyName=keyName;
+    var type=type;
+    var cb=cb;
+    if(__isFunction(type)){
+        cb=type;
+        type="value";
+    }
     if (__isArray(json)) {
         json.map(function(item) {
-            __selectArr(item, keyName,type)
+            __selectArr(item, keyName,type,cb);
         });
     }
     if (__isObj(json)) {
@@ -26,22 +37,27 @@ function __selectArr(json,keyName,type) {
             console.log(key);
             if (key === keyName) {
                 //找到了
+                var joinObj=null;
                 switch (type) {
                 case 'self':
                     //取出包含key的本身
-                    _tmp_array.push(json);
+                    joinObj=json;
                     break;
                 case 'value':
                     //取出值
-                    _tmp_array.push(obj);
+                    joinObj=obj;
                     break;
                 default:
-                    _tmp_array.push(obj);
+                    joinObj=obj;
                     //取出值
                     break;
                 }
+                if(__isFunction(cb)){
+                    joinObj=cb(joinObj);
+                }
+                _tmp_array.push(joinObj);
             } else {
-                __selectArr(obj, keyName,type)
+                __selectArr(obj, keyName,type,cb);
             }
         }
     }
@@ -60,9 +76,9 @@ module.exports = {
         _select_array=[];
         return this;
     },
-    select: function(keyName, type) {
+    select: function(keyName, type,cb) {
         _tmp_array=[];
-        __selectArr(_array,keyName,type);
+        __selectArr(_array,keyName,type,cb);
         _select_array=_tmp_array;
         _array=_select_array;
         return this;
