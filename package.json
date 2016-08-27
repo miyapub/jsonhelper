@@ -1,0 +1,19 @@
+{
+  "name": "jsonhelper",
+  "version": "1.0.0",
+  "description": "select json easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyapub/jsonhelper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miyapub/jsonhelper/issues"
+  },
+  "homepage": "https://github.com/miyapub/jsonhelper#readme"
+}

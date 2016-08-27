@@ -1,18 +1,4 @@
-# jsonhelper
-select json easy
-### install
-```
-npm install jsonhelper
-```
-
-### how to use ?
-
-1) reuire :
-```
-var JsonHelper=require('jsonhelper');
-```
-2):codeing here:
-```
+var JsonHelper=require('./index');
 var array=JsonHelper.set(
     {
         books:[
@@ -37,9 +23,4 @@ var array=JsonHelper.set(
         }
     }
 ).toArray();
-```
-
-### test
-```
-npm test
-```
+console.log(array);
